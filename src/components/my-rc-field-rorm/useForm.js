@@ -79,7 +79,7 @@ class FormStore {
   };
 }
 export default function useForm() {
-  //使用useRef将store存储  存在filber  在组件卸载之前都是同一个值
+  //使用useRef将store存储  存在fiber  在组件卸载之前都是同一个值
   const formRef = useRef();
   if (!formRef.current) {
     const formStore = new FormStore();
