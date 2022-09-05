@@ -8,11 +8,11 @@ class FormStore {
     //定义数组 存储
     this.fieldEntities = [];
     //将提交事件或者提交之后执行存起来
-    this.callbacks = []
+    this.callbacks = [];
   }
-  setCallbacks = (callbacks)=>{
-    this.callbacks = {...callbacks,...this.callbacks}
-  }
+  setCallbacks = (callbacks) => {
+    this.callbacks = { ...callbacks, ...this.callbacks };
+  };
   //注册实例（forceUpdate） 如果组件不在 需要去掉
   //注册与取消注册，订阅与取消订阅  都需要成对出现
   registerFieldEntities = (entity) => {
@@ -52,19 +52,28 @@ class FormStore {
   validate = () => {
     let err = [];
 
+    //简单校验
+    this.fieldEntities.forEach((entity) => {
+      const { name, rules } = entity.props;
+      const value = this.getFieldValue(name);
+      let rule = rules[0];
+      if (rule && rule.required && (value === undefined || value === "")) {
+        err.push({ [name]: rule.message, value });
+      }
+    });
     return err;
   };
   //这里写提交事件
   submit = () => {
-    console.log("onsubmit");
     let err = this.validate();
-    const {onFinish,onFinishFailed} = this.callbacks
+    const { onFinish, onFinishFailed } = this.callbacks;
+    console.log(this.callbacks);
     if (err.length === 0) {
       //校验通过
-      onFinish(this.getFieldsValue())
+      onFinish(this.getFieldsValue());
     } else {
       //校验未通过
-      onFinishFailed(err,this.getFieldsValue())
+      onFinishFailed(err, this.getFieldsValue());
     }
   };
   getForm = () => {
@@ -74,16 +83,20 @@ class FormStore {
       setFieldsValue: this.setFieldsValue,
       registerFieldEntities: this.registerFieldEntities,
       submit: this.submit,
-      setCallbacks:this.setCallbacks
+      setCallbacks: this.setCallbacks,
     };
   };
 }
-export default function useForm() {
+export default function useForm(form) {
   //使用useRef将store存储  存在filber  在组件卸载之前都是同一个值
   const formRef = useRef();
   if (!formRef.current) {
-    const formStore = new FormStore();
-    formRef.current = formStore.getForm();
+    if (form) {
+      formRef.current = form;
+    } else {
+      const formStore = new FormStore();
+      formRef.current = formStore.getForm();
+    }
   }
   return [formRef.current];
 }
