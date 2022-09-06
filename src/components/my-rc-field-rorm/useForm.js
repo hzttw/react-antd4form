@@ -11,7 +11,7 @@ class FormStore {
     this.callbacks = [];
   }
   setCallbacks = (callbacks) => {
-    this.callbacks = { ...callbacks, ...this.callbacks };
+    this.callbacks = { ...this.callbacks, ...callbacks };
   };
   //注册实例（forceUpdate） 如果组件不在 需要去掉
   //注册与取消注册，订阅与取消订阅  都需要成对出现
