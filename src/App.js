@@ -1,9 +1,12 @@
-import MyRCFieldForm from "./pages/MyRCFieldForm";
+// import MyRCFieldForm from "./pages/MyRCFieldForm";
+
+import FormilyPage from "./pages/FormilyPage";
 
 function App() {
   return (
     <div className="App">
-    <MyRCFieldForm></MyRCFieldForm>
+    {/* <MyRCFieldForm></MyRCFieldForm> */}
+    <FormilyPage></FormilyPage>
     </div>
   );
 }
