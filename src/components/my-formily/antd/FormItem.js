@@ -1,9 +1,9 @@
-import { FieldContext, observer } from "@/which";
-import React from "react";
-import { useContext } from "react";
+import {useContext} from "react";
+import {observer, FieldContext} from "@/which";
 
-const FormItem = observer(({ children }) => {
+const FormItem = observer(({children}) => {
   const field = useContext(FieldContext);
+
   return (
     <div>
       <div>{field.title}</div>
@@ -12,4 +12,5 @@ const FormItem = observer(({ children }) => {
     </div>
   );
 });
+
 export default FormItem;

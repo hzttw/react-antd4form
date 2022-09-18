@@ -11,6 +11,8 @@ import {
 const form = createForm();
 
 const createPasswordEqualValidate = (equalName) => (field) => {
+  console.log(equalName);
+  console.log(field);
   if (
     form.values.confirm_password &&
     field.value &&
@@ -73,4 +75,3 @@ export default function ReactPage(props) {
     </div>
   );
 }
-

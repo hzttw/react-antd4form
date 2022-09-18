@@ -1,29 +1,28 @@
-import { useParentForm } from "@/which";
-import React from "react";
+import {useParentForm} from "@/which";
 
 export default function Submit({
-  children,
+  onClick,
   onSubmit,
   onSubmitSuccess,
   onSubmitFailed,
-  onClick,
+  children,
 }) {
-  //获取form表单
   const form = useParentForm();
+
   return (
     <button
       onClick={(e) => {
         if (onClick) {
-          if (onClick(e) === false) {
-            return;
+            if (onClick(e) === false) return
+          }
+          if (onSubmit) {
+            form.submit(onSubmit).then(onSubmitSuccess).catch(onSubmitFailed)
           }
         }
-        if (onSubmit) {
-          form.submit(onSubmit).then(onSubmitSuccess).catch(onSubmitFailed);
-        }
-      }}
-    >
+      }
+      >
       {children}
     </button>
   );
 }
+
