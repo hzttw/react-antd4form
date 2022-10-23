@@ -33,7 +33,7 @@ export default function AntdPage(props) {
           title="Name"
           required
           decorator={[FormItem]}
-          component={[Input, {placeholder: "Please Input"}]}
+          component={[Input, { placeholder: "Please Input" }]}
         />
 
         <Field
@@ -41,7 +41,7 @@ export default function AntdPage(props) {
           title="Password"
           required
           decorator={[FormItem]}
-          component={[Input, {type: "password", placeholder: "Please Input"}]}
+          component={[Input, { type: "password", placeholder: "Please Input" }]}
           reactions={createPasswordEqualValidate("confirm_password")}
         />
         <Field
@@ -49,7 +49,7 @@ export default function AntdPage(props) {
           title="Confirm Password"
           required
           decorator={[FormItem]}
-          component={[Input, {type: "password", placeholder: "Please Input"}]}
+          component={[Input, { type: "password", placeholder: "Please Input" }]}
           reactions={createPasswordEqualValidate("password")}
         />
 
@@ -62,7 +62,8 @@ export default function AntdPage(props) {
           }}
           onSubmitFailed={() => {
             console.log("omg failed"); //sy-log
-          }}>
+          }}
+        >
           提交
         </Submit>
 
@@ -73,4 +74,3 @@ export default function AntdPage(props) {
     </div>
   );
 }
-
